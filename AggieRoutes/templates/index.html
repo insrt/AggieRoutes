@@ -7,12 +7,14 @@
         width: 600px;
        }
     </style>
+    <!---Script for Autocomplete API
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyACZvbk-O8xlqcPxNzjNEGQyDlGjaeUezk&libraries=places"></script>
+    -->
   </head>
   <body>
-
-    <form action="/map/" method="post">
+    <form action="/map/" method="post"> 
       {% csrf_token %}
-      <input type="location" name="location" value="">
+      <input id='searchTextField' type="location" name="location" value="">
       <input type="submit" value="Submit">
     </form>
 
@@ -62,6 +64,10 @@
         }
       });
     }
+
+    //var input = document.getElementById('searchTextField');
+       
+    //var autocomplete = new google.maps.places.Autocomplete(input);
     </script>
     <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCxn9JtPSWjxomjxr4Xo8ZYk8opAO0aZMw&callback=initMap">

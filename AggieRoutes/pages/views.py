@@ -2,16 +2,27 @@ from django.shortcuts import render
 import requests, json
 
 def home_view(request, *args, **kwargs):
-	
 	return render(request, "index.html")
 
 def map_view(request, *args, **kwargs):
 	location = request.POST.get("location")
 	api_key="AIzaSyACZvbk-O8xlqcPxNzjNEGQyDlGjaeUezk"
-	url="https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input={location}&inputtype=textquery&fields=formatted_address,place_id&key={key}".format(location=location,key=api_key)
-	address = requests.get(url)
-	response = address.json()
-	print(response)
+
+	#get formal address from Google Place Search API
+	url="https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input={location}&inputtype=textquery&fields=formatted_address&key={key}".format(location=location,key=api_key)
+	response = requests.get(url)
+	address = response.json()
+	parsed_address= address["candidates"][0]["formatted_address"]
+
+	#get latitude and longitude from Google Geocode API
+	url2 = "https://maps.googleapis.com/maps/api/geocode/json?address={address}&key={key}".format(address=parsed_address,key=api_key)
+	response2 = requests.get(url2)
+	latlong = response2.json()
+	lat = latlong["results"][0]["geometry"]["location"]["lat"]
+	lng = latlong["results"][0]["geometry"]["location"]["lng"]
+	print("Latitude:%s" % lat)
+	print("Longitude:%s" % lng)
+
 	return render(request, "map.html")
 	
 	
