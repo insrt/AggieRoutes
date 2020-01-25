@@ -22,5 +22,6 @@ from pages.views import *
 urlpatterns = [
 	path('', home_view),
     path('admin/', admin.site.urls),
-    path('home/', home_view, name='home')
-]
+    path('home/', home_view, name='home'),
+    path('map/', map_view ,name="map")
+    ]

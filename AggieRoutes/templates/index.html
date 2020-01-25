@@ -9,6 +9,13 @@
     </style>
   </head>
   <body>
+
+    <form action="/map/" method="post">
+      {% csrf_token %}
+      <input type="location" name="location" value="">
+      <input type="submit" value="Submit">
+    </form>
+
     <div id="map"></div>
     <div id="msg"></div>
     <script>
