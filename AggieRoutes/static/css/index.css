@@ -1,0 +1,101 @@
+html, body, div, span, applet, object,
+iframe, h1, h2, h3, h4, h5, h6, p, blockquote,
+pre, a, abbr, acronym, address, big, cite,
+code, del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var, b,
+u, i, center, dl, dt, dd, ol, ul, li, fieldset,
+form, label, legend, table, caption, tbody,
+tfoot, thead, tr, th, td, article, aside,
+canvas, details, embed, figure, figcaption,
+footer, header, hgroup, menu, nav, output, ruby,
+section, summary, time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font: inherit;
+    vertical-align: baseline;}
+
+@site-font {
+    font-family: "Oxygen";
+    src: url("https://fonts.googleapis.com/css?family=Oxygen");
+}
+
+html {
+    font-family: "Oxygen";
+}
+
+#map {
+    top: 4em;
+    height: 93vh;
+    width: 80%;
+    float: right;
+}
+
+#banner-wrapper{
+    background-color: #500000;
+    border-bottom: solid 1px rgba(160, 160, 160, 0.3);
+    height: 4em;
+    left: 0;
+    line-height: 3.5em;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 10000;
+
+}
+    #banner {
+        color: #ffffff;
+        font-size: 3em;
+        text-align: center;
+        font-family: Georgia;
+    }
+
+#sidebar{
+    background-color: #aaaaaa;
+    height: 100vh;
+    width: 20%;
+    float: left;
+}
+    
+    #pac-input {
+        width: 90%
+    }
+
+    @media screen and (max-width: 1680px) {
+
+    #input {
+        padding-top: 5em;
+        color: #000000;
+        overflow: hidden;
+        font-size: 14pt; 
+    }
+
+    #msg {
+        padding-top: 5em;
+        color: #000000;
+        overflow: hidden;
+        font-size: 14pt; 
+    }
+
+    @media screen and (max-width: 736px) {
+
+    #input {
+        padding-top: 10em;
+        color: #000000;
+        overflow: hidden;
+        font-size: 8pt; 
+    }
+
+    #msg {
+        padding-top: 10em;
+        color: #000000;
+        overflow: hidden;
+        font-size: 8pt; 
+    }
+
+
+
+
+#msg {
+
+}

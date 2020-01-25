@@ -1,74 +1,46 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <style>
-      #map {
-        height: 400px;
-        width: 600px;
-       }
-    </style>
-    <!---Script for Autocomplete API
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyACZvbk-O8xlqcPxNzjNEGQyDlGjaeUezk&libraries=places"></script>
-    -->
+    <title>AggieMaps</title>
+    {% load static %}
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link href="https://fonts.googleapis.com/css?family=Oxygen" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/index.css' %}" type="text/css"/>
   </head>
   <body>
-    <form action="/map/" method="post"> 
-      {% csrf_token %}
-      <input id='searchTextField' type="location" name="location" value="">
-      <input type="submit" value="Submit">
-    </form>
+    <!-- Banner -->
+    <div id="banner-wrapper">
+      <header id="banner">
+        AggieMaps
+      </header>
 
+    </div>
+
+    <!-- Sidebar -->
+    <div id="sidebar">
+      <ul>
+        <li id="input">
+          Enter Origin: 
+          <input id="pac-input" type="text">
+        </li>
+        <li id="input">
+          Enter Destination: 
+          <input id="pac-input" type="text">
+        </li>
+      </ul>
+      <div id="msg">
+        Distance to destination is:
+        <br/>
+      </div>          
+    </div>
+
+    <!-- Map -->
     <div id="map"></div>
-    <div id="msg"></div>
-    <script>
-    var map;
-    function initMap() {
-    const center = {lat: 30.61353, lng: -96.34167};
-    const options = {zoom: 15, scaleControl: true, center: center};
-    map = new google.maps.Map(
-        document.getElementById('map'), options);
-    // Locations of landmarks
-    //30.6102898,-96.3370759    MSC
-    // 30.61353, -96.34167      Bus stop
-    const MSC = {lat: 30.6102898, lng: -96.3370759};
-    const Bus_Stop = {lat: 30.61353, lng: -96.34167};
-    var mk1 = new google.maps.Marker({position: MSC, map: map});
-    var mk2 = new google.maps.Marker({position: Bus_Stop, map: map});
 
-    let directionsService = new google.maps.DirectionsService();
-    let directionsRenderer = new google.maps.DirectionsRenderer();
-    directionsRenderer.setMap(map); 
-   
-    const route = {
-        origin: MSC,
-        destination: Bus_Stop,
-        travelMode: 'DRIVING'
-    }
+    <!-- Travel Info -->
 
-    directionsService.route(route,
-      function(response, status) { 
-        if (status !== 'OK') {
-          window.alert('Directions request failed due to ' + status);
-          return;
-        } else {
-          directionsRenderer.setDirections(response); 
-          var directionsData = response.routes[0].legs[0]; 
-          if (!directionsData) {
-            window.alert('Directions request failed');
-            return;
-          }
-          // Print message about distance and time
-          // else {
-          //   document.getElementById('msg').innerHTML += " Driving distance is " + directionsData.distance.text + " (" + directionsData.duration.text + ").";
-          // }
-        }
-      });
-    }
-
-    //var input = document.getElementById('searchTextField');
-       
-    //var autocomplete = new google.maps.places.Autocomplete(input);
-    </script>
+    <script src="{% static '/js/route.js' %}"></script>
     <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCxn9JtPSWjxomjxr4Xo8ZYk8opAO0aZMw&callback=initMap">
     </script>
