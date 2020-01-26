@@ -6,18 +6,20 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
     <link href="https://fonts.googleapis.com/css?family=Oxygen" rel="stylesheet" type="text/css">
+    
     <link rel="stylesheet" href="{% static 'css/index.css' %}" type="text/css"/>
   </head>
   <body>
-    <!-- Banner -->
+    <!-- Banner
     <div id="banner-wrapper">
       <header id="banner">
-        AggieMaps
+        <h1>AggieMaps</h1>
       </header>
-    </div>
+    </div> -->
 
     <!-- Sidebar -->
     <div id="sidebar">
+      <h1 id=heading>AggieRoutes</h1>
       <ul>
         <li id="input">
           <form action="" method="POST">
@@ -31,16 +33,12 @@
           -->
         </form>
         </li>
-        <li id="input">
-          Enter Destination: 
-          <input id="pac-input" type="text">
-        </li>
-        
       </ul>
+
       <div id="msg">
         Distance to destination is:
         <br/>
-      </div>          
+      </div> 
     </div>
 
     <!-- Map -->
