@@ -3,10 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Test</title>
 </head>
 <body>
-    ok
+    <div id="map" style="height: 500px;"></div>
+    <script src="{% static '/js/route.js' %}"></script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCxn9JtPSWjxomjxr4Xo8ZYk8opAO0aZMw&callback=initMap">
+    </script>
 </body>
 </html>

@@ -1,58 +1,65 @@
 import requests
 import json
 
+routeNumber = [
+        '01',
+        '02',
+        '03',
+        '01-04',
+        '03-05',
+        '04',
+        '05',
+        '06',
+        '07',
+        '08',
+        '12',
+        '12-25',
+        '15',
+        '22',
+        '25',
+        '26',
+        '27',
+        '31',
+        '34',
+        '35',
+        '36',
+        '40',
+        '47',
+        'N15',
+    ]
 
-class busStop:
-    stopName = ''
-    routeNum = -1
-    latitude = -1
-    longitude = -1
+buses = {}
+stops = {}
+for i, route in enumerate(routeNumber):
+    stop_names = []
+    url = 'https://transport.tamu.edu/BusRoutesFeed/api/route/' + route + '/stops'
 
-    def __init__(self, stop, num, lat, lon):
-        self.stopName = stop
-        self.routeNum = num
-        self.latitude = lat
-        self.longitude = lon
+    response = requests.get(url)
 
-    def printAll(self):
-        print(self.stopName)
-        print(self.routeNum)
-        print(self.latitude)
-        print(self.longitude)
+    data = response.text
+    parsed = json.loads(data)
+
+    magicLat = 117029.1868  # Conversion number for latitude
+    magicLong = 111319.2856  # Conversion number for longitude
+    oldLat = 0
+    oldLong = 0
+
+    for stop in parsed:
+        oldLat = stop['Latitude']  # Original pre converted latitude
+        oldLong = stop['Longtitude']  # Original pre converted longitude
+        newLat = oldLat / magicLat
+        newLong = oldLong / magicLong
 
 
-routeNumber = '01-04'
+        stop_names.append(stop['Name'])
+        if stop['Name'] not in stops.keys():
+            stops[stop['Name']] = (newLong, newLat)
 
-url = 'https://transport.tamu.edu/BusRoutesFeed/api/route/' + routeNumber + '/stops'
+    buses[route] = stop_names
 
-response = requests.get(url)
+with open('./static/json/stops_data.json', 'w') as fp:
+    json.dump(stops, fp)
 
-data = response.text
-parsed = json.loads(data)
+with open('./static/json/bus_data.json', 'w') as fp:
+    json.dump(buses, fp)
 
-magicLat = 117029.1868  # Conversion number for latitude
-magicLong = 111319.2856  # Conversion number for longitude
-oldLat = 0
-oldLong = 0
-
-stopList = []
-
-for stop in parsed:
-    # print(stop['Name'])
-    oldLat = stop['Latitude']  # Original pre converted latitude
-    oldLong = stop['Longtitude']  # Original pre converted longitude
-    # print('Lat/Long:')
-    newLat = oldLat / magicLat
-    newLong = oldLong / magicLong
-    # print(newLat)
-    # print(newLong)
-    # print('\n')
-
-    currStop = busStop(stop['Name'], routeNumber, newLat, newLong)
-    stopList.append(currStop)
-
-for stop in stopList:
-    stop.printAll()
-    print('\n')
-
-# print(json.dumps(parsed, indent=4))
