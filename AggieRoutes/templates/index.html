@@ -13,20 +13,26 @@
     <div id="banner-wrapper">
       <header id="banner">
         AggieMaps
+        {{lat}}
       </header>
     </div>
 
     <!-- Sidebar -->
     <div id="sidebar">
       <ul>
-        <li id="input">
-          Enter Origin: 
-          <input id="pac-input" type="text">
-        </li>
+        <form action="" method="POST">
+          {% csrf_token %}  
+          <li id="input">
+            Enter Origin: 
+            <input id="pac-input" type="text">
+            <input type="submit" text="submit">
+          </li>
+        </form>
         <li id="input">
           Enter Destination: 
           <input id="pac-input" type="text">
         </li>
+        
       </ul>
       <div id="msg">
         Distance to destination is:
@@ -38,7 +44,11 @@
     <div id="map"></div>
 
     <!-- Travel Info -->
-
+    <script type="text/javascript">
+      dest_lat = {{ lat }};
+      dest_lng = {{ lng }};
+      console.log(dest_lat);
+    </script>
     <script src="{% static '/js/route.js' %}"></script>
     <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCxn9JtPSWjxomjxr4Xo8ZYk8opAO0aZMw&callback=initMap">

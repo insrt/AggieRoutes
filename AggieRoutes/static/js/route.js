@@ -1,3 +1,5 @@
+//import * as views from pages.views;
+
 var map;
 function initMap() {
   const center = {lat: 30.61353, lng: -96.34167};
@@ -20,12 +22,13 @@ function initMap() {
   map.controls.push(input);
 
   // var autocomplete = new google.maps.places.Autocomplete(input,opt);
-
-  const MSC = {lat: 30.6102898, lng: -96.3370759};
+  var MSC = {lat: dest_lat, lng: dest_lng};
   const Bus_Stop = {lat: 30.61353, lng: -96.34167};
+  
+
   var mk1 = new google.maps.Marker({position: MSC, map: map});
   var mk2 = new google.maps.Marker({position: Bus_Stop, map: map});
-
+  
   let directionsService = new google.maps.DirectionsService();
   let directionsRenderer = new google.maps.DirectionsRenderer();
   directionsRenderer.setMap(map); 
