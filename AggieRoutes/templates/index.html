@@ -25,7 +25,7 @@
     <div id="sidebar">
       <div class="media">
         <div class=media-body>
-          <h1 class="media-heading" id=heading>AggieRoutes</h1>
+          <h1 class="media-heading" id=heading>BusIt</h1>
         </div>
         <span class="media-right">
             <img id=spirit-bus src="{%static '/images/white_spirit_bus.png'%}" alt="" >
@@ -47,7 +47,7 @@
  
         </li>
       </ul>
-
+      {% if best_bus != 0 %}
       <div id="msg">
         Take bus {{ best_bus }}
         <br/>
@@ -59,6 +59,7 @@
         Distance to destination is:
         <br/>
       </div> 
+      {% endif %}
     </div>
 
     <!-- Map -->

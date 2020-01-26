@@ -44,6 +44,11 @@ def home_view(request, *args, **kwargs):
 	orig_lng = ""
 	dest_lat = ""
 	dest_lng = ""
+	start_bus = 0
+	start_loc = 0
+	stop_bus = 0
+	stop_loc = 0
+	best_bus = 0
 
 	if(request.method=="POST"):
 		api_key="AIzaSyACZvbk-O8xlqcPxNzjNEGQyDlGjaeUezk"
@@ -83,10 +88,11 @@ def home_view(request, *args, **kwargs):
 				dest_lat = dest_latlong["results"][0]["geometry"]["location"]["lat"]
 				dest_lng = dest_latlong["results"][0]["geometry"]["location"]["lng"]
 				(start_bus, start_loc), (stop_bus, stop_loc), best_bus = bus_locations((orig_lng,orig_lat),(dest_lng,dest_lat))
+				
 
 	else:
 		form = LocationForm()
-	return render(request, "index.html", {'form':form,'orig_lat':orig_lat,'orig_lng':orig_lng,'dest_lat':dest_lat,'dest_lng':dest_lng, 'start_bus':start_bus, 'start_loc':start_loc, 'stop_bus':stop_bus, 'stop_loc':stop_loc, 'best_bus':best_bus})#{'lat':lat, 'lng':lng},)
+	return render(request, "index.html", {'form':form,'orig_lat':orig_lat,'orig_lng':orig_lng,'dest_lat':dest_lat,'dest_lng':dest_lng, 'start_bus':start_bus, 'start_loc':start_loc, 'stop_bus':stop_bus, 'stop_loc':stop_loc, 'best_bus':best_bus})
 
 
 
