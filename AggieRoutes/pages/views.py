@@ -86,11 +86,10 @@ def home_view(request, *args, **kwargs):
 				print("Dest Latitude:%s" % dest_lat)
 				print("Dest Longitude:%s" % dest_lng)
 				(start_bus, start_loc), (stop_bus, stop_loc) = bus_locations((orig_lng,orig_lat),(dest_lng,dest_lat))
-				print(start_bus, start_loc, stop_bus, stop_loc)
 
 	else:
 		form = LocationForm()
-	return render(request, "index.html", {'form':form,'orig_lat':orig_lat,'orig_lng':orig_lng,'dest_lat':dest_lat,'dest_lng':dest_lng})#{'lat':lat, 'lng':lng},)
+	return render(request, "index.html", {'form':form,'orig_lat':orig_lat,'orig_lng':orig_lng,'dest_lat':dest_lat,'dest_lng':dest_lng, 'start_bus':start_bus, 'start_loc':start_loc, 'stop_bus':stop_bus, 'stop_loc':stop_loc})#{'lat':lat, 'lng':lng},)
 
 
 

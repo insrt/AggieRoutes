@@ -24,19 +24,40 @@ function initMap() {
   // var autocomplete = new google.maps.places.Autocomplete(input,opt);
   var MSC = {lat: dest_lat, lng: dest_lng};
   var Bus_Stop = {lat: orig_lat, lng: orig_lng};
-  
+  var bus_stop_0 = new google.maps.LatLng(start_loc[1], start_loc[0])
+  var bus_stop_1 = new google.maps.LatLng(stop_loc[1], stop_loc[0])
 
   var mk1 = new google.maps.Marker({position: MSC, map: map});
   var mk2 = new google.maps.Marker({position: Bus_Stop, map: map});
   
+  var orig_bus_0 = new google.maps.Polyline({
+          path: [MSC, bus_stop_1],
+          geodesic: true,
+          strokeColor: '#000000',
+          strokeOpacity: 1.0,
+          strokeWeight: 2
+        });
+
+  orig_bus_0.setMap(map);
+
+  var bus_1_dest = new google.maps.Polyline({
+          path: [bus_stop_0, Bus_Stop],
+          geodesic: true,
+          strokeColor: '#000000',
+          strokeOpacity: 1.0,
+          strokeWeight: 2
+        });
+
+  bus_1_dest.setMap(map);
+
   let directionsService = new google.maps.DirectionsService();
   let directionsRenderer = new google.maps.DirectionsRenderer();
   directionsRenderer.setMap(map); 
 
   const route = {
-      origin: MSC,
-      destination: Bus_Stop,
-      travelMode: 'WALKING'
+      origin: bus_stop_0,
+      destination: bus_stop_1,
+      travelMode: 'DRIVING'
   }
 
 directionsService.route(route,
@@ -57,4 +78,5 @@ directionsService.route(route,
       }
     }
   });
+
 }
