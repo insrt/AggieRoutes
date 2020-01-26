@@ -6,6 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
     <link href="https://fonts.googleapis.com/css?family=Oxygen" rel="stylesheet" type="text/css">
+    <!-- Google Autocomplete API -->
     <!-- bootstrap -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
@@ -25,27 +26,37 @@
     <div id="sidebar">
       <div class="media">
         <div class=media-body>
-          <h1 class="media-heading" id=heading>BusIt</h1>
+          <h1 class="media-heading" id=heading>BusIT</h1>
         </div>
-        <span class="media-right">
+        <!-- <span class="media-right">
             <img id=spirit-bus src="{%static '/images/white_spirit_bus.png'%}" alt="" >
-          </span>
+          </span> -->
       </div>
       <ul>
         <li id="input">
-          <form action="" method="POST">
-            {% csrf_token %}  
-            {{ form }}
-            <input class="btn btn-success" type="submit" value="Gig 'em!">
+            <form action="" method="POST">
+              {% csrf_token %}
+              <ul>
+                <label text-align=left for="Start Point">Start Point</label>  
+                {{ form.origin }}
+              </ul>
+              <br/>
+              <br>
+              <ul>
+                <label for="End Point">End Point</label>
+                {{ form.dest }}
+              </ul>
+              <br>
+              <input class="btn btn-success" type="submit" value="Gig 'em!">
 
-          <!-- <li id="input">
-            Enter Origin: 
-            <input id="pac-input" type="text">
-            <input type="submit" text="submit">
-          -->
-          </form>
- 
-        </li>
+            <!-- <li id="input">
+              Enter Origin: 
+              <input id="pac-input" type="text">
+              <input type="submit" text="submit">
+            -->
+            </form>
+  
+          </li>
       </ul>
       {% if best_bus != 0 %}
       <div id="msg">
@@ -60,6 +71,7 @@
         <br/>
       </div> 
       {% endif %}
+      <!-- <img id="github_logo" src="{% static 'images/github_logo.svg'%}" alt=""> -->
     </div>
 
     <!-- Map -->
@@ -78,5 +90,7 @@
     <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCxn9JtPSWjxomjxr4Xo8ZYk8opAO0aZMw&callback=initMap">
     </script>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyACZvbk-O8xlqcPxNzjNEGQyDlGjaeUezk&libraries=places"></script>
+
   </body>
 </html>

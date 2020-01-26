@@ -18,10 +18,13 @@ function initMap() {
     bounds: defaultBounds
   }
 
-  var input = document.getElementById('pac-input');
-  map.controls.push(input);
+  var origin_input = document.getElementById('id_origin');
+  var dest_input = document.getElementById('id_dest');
+  map.controls.push(origin_input);
 
-  // var autocomplete = new google.maps.places.Autocomplete(input,opt);
+  var autocomplete = new google.maps.places.Autocomplete(origin_input,opt);
+  var autocomplete_dest = new google.maps.places.Autocomplete(dest_input, opt);
+  console.log(origin_input);  
   var MSC = {lat: dest_lat, lng: dest_lng};
   var Bus_Stop = {lat: orig_lat, lng: orig_lng};
   var bus_stop_0 = new google.maps.LatLng(start_loc[1], start_loc[0])

@@ -56,12 +56,16 @@ html {
     height: 100vh;
     width: 30%;
     float: left;
+    text-align: center;
 }
+
     #heading{
         font-size: 30pt;
         font-style:italic;
         font-weight:bold;
         color: #FFFFFF;
+        margin-left: auto;
+        margin-right: auto;
     }
 
     #spirit-bus{
@@ -72,6 +76,12 @@ html {
     #pac-input {
         width: 90%
     }
+
+    #id_origin, #id_dest{
+        width: 90%;
+        text-align: center;
+    }
+
 
     @media screen and (max-width: 1680px) {
 
@@ -103,6 +113,14 @@ html {
         color: #000000;
         overflow: hidden;
         font-size: 8pt; 
+    }
+
+    #github_logo{
+        height: 50px;
+        width: 50px;
+        opacity: .5;
+        float: left;
+
     }
 
 
