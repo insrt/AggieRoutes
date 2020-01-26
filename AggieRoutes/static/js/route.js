@@ -23,7 +23,7 @@ function initMap() {
 
   // var autocomplete = new google.maps.places.Autocomplete(input,opt);
   var MSC = {lat: dest_lat, lng: dest_lng};
-  const Bus_Stop = {lat: 30.61353, lng: -96.34167};
+  var Bus_Stop = {lat: orig_lat, lng: orig_lng};
   
 
   var mk1 = new google.maps.Marker({position: MSC, map: map});

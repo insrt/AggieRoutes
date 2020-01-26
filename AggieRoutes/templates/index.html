@@ -48,8 +48,10 @@
 
     <!-- Travel Info -->
     <script type="text/javascript">
-      dest_lat = {{ lat }};
-      dest_lng = {{ lng }};
+      orig_lat = {{orig_lat}};
+      orig_lng = {{orig_lng}};
+      dest_lat = {{ dest_lat }};
+      dest_lng = {{ dest_lng }};
       console.log(dest_lat);
     </script>
     <script src="{% static '/js/route.js' %}"></script>
