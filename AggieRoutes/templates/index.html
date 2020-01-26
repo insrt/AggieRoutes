@@ -13,21 +13,24 @@
     <div id="banner-wrapper">
       <header id="banner">
         AggieMaps
-        {{lat}}
       </header>
     </div>
 
     <!-- Sidebar -->
     <div id="sidebar">
       <ul>
-        <form action="" method="POST">
-          {% csrf_token %}  
-          <li id="input">
+        <li id="input">
+          <form action="" method="POST">
+            {% csrf_token %}  
+            {{ form }}
+            <input type="submit" value="ok">
+          <!-- <li id="input">
             Enter Origin: 
             <input id="pac-input" type="text">
             <input type="submit" text="submit">
-          </li>
+          -->
         </form>
+        </li>
         <li id="input">
           Enter Destination: 
           <input id="pac-input" type="text">
