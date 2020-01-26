@@ -29,10 +29,11 @@ def bus_locations(origin, dest):
 
 					if dist < best:
 						best = dist
+						best_bus = bus
 						start = stop_0
 						stop = stop_1
 
-	return (start, stops_data[start]), (stop, stops_data[stop])
+	return (start, stops_data[start]), (stop, stops_data[stop]), best_bus
 
 
 def home_view(request, *args, **kwargs):
@@ -65,8 +66,6 @@ def home_view(request, *args, **kwargs):
 				orig_latlong = response2.json()
 				orig_lat = orig_latlong["results"][0]["geometry"]["location"]["lat"]
 				orig_lng = orig_latlong["results"][0]["geometry"]["location"]["lng"]
-				print("Origin Latitude:%s" % orig_lat)
-				print("Origin Longitude:%s" % orig_lng)
 
 			#gets coords for destination
 			dest = request.POST['dest']
@@ -83,13 +82,11 @@ def home_view(request, *args, **kwargs):
 				dest_latlong = response2.json()
 				dest_lat = dest_latlong["results"][0]["geometry"]["location"]["lat"]
 				dest_lng = dest_latlong["results"][0]["geometry"]["location"]["lng"]
-				print("Dest Latitude:%s" % dest_lat)
-				print("Dest Longitude:%s" % dest_lng)
-				(start_bus, start_loc), (stop_bus, stop_loc) = bus_locations((orig_lng,orig_lat),(dest_lng,dest_lat))
+				(start_bus, start_loc), (stop_bus, stop_loc), best_bus = bus_locations((orig_lng,orig_lat),(dest_lng,dest_lat))
 
 	else:
 		form = LocationForm()
-	return render(request, "index.html", {'form':form,'orig_lat':orig_lat,'orig_lng':orig_lng,'dest_lat':dest_lat,'dest_lng':dest_lng, 'start_bus':start_bus, 'start_loc':start_loc, 'stop_bus':stop_bus, 'stop_loc':stop_loc})#{'lat':lat, 'lng':lng},)
+	return render(request, "index.html", {'form':form,'orig_lat':orig_lat,'orig_lng':orig_lng,'dest_lat':dest_lat,'dest_lng':dest_lng, 'start_bus':start_bus, 'start_loc':start_loc, 'stop_bus':stop_bus, 'stop_loc':stop_loc, 'best_bus':best_bus})#{'lat':lat, 'lng':lng},)
 
 
 

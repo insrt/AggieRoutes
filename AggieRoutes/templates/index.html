@@ -33,10 +33,9 @@
       </div>
       <ul>
         <li id="input">
-          {% load crispy_forms_tags %}
           <form action="" method="POST">
             {% csrf_token %}  
-            {{ form|crispy }}
+            {{ form }}
             <input class="btn btn-success" type="submit" value="Gig 'em!">
 
           <!-- <li id="input">
@@ -50,6 +49,13 @@
       </ul>
 
       <div id="msg">
+        Take bus {{ best_bus }}
+        <br/>
+        <br/>
+        Get on at {{ start_bus }}
+        <br/>
+        Get off at {{ stop_bus }}
+        <br/>
         Distance to destination is:
         <br/>
       </div> 
