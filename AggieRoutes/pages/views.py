@@ -1,6 +1,39 @@
 from django.shortcuts import render
 from .forms import LocationForm
+from django.conf import settings
+import numpy as np 
 import requests, json
+
+def bus_locations(origin, dest):
+	with open(settings.BASE_DIR + settings.STATIC_URL + 'json/bus_data.json') as json_file:
+	    bus_data = json.load(json_file)
+
+	with open(settings.BASE_DIR + settings.STATIC_URL + 'json/stops_data.json') as json_file:
+	    stops_data = json.load(json_file)
+
+	origin = np.array(origin)
+
+	best = np.inf
+	orig_stop = {}
+	stop_dest = {}
+	for stop_name in stops_data:
+		candidate = np.array((stops_data[stop_name][0], stops_data[stop_name][1]))
+		orig_stop[stop_name] = np.linalg.norm(origin-candidate)
+		stop_dest[stop_name] = np.linalg.norm(candidate-dest)
+
+	for stop_0 in orig_stop:
+		for stop_1 in stop_dest:
+			for bus in bus_data:
+				if stop_0 in bus_data[bus] and stop_1 in bus_data[bus]:
+					dist = orig_stop[stop_0] + stop_dest[stop_1]
+
+					if dist < best:
+						best = dist
+						start = stop_0
+						stop = stop_1
+
+	return (start, stops_data[start]), (stop, stops_data[stop])
+
 
 def home_view(request, *args, **kwargs):
 	#default lat and lng -- MSC coords
@@ -52,6 +85,8 @@ def home_view(request, *args, **kwargs):
 				dest_lng = dest_latlong["results"][0]["geometry"]["location"]["lng"]
 				print("Dest Latitude:%s" % dest_lat)
 				print("Dest Longitude:%s" % dest_lng)
+				(start_bus, start_loc), (stop_bus, stop_loc) = bus_locations((orig_lng,orig_lat),(dest_lng,dest_lat))
+				print(start_bus, start_loc, stop_bus, stop_loc)
 
 	else:
 		form = LocationForm()
